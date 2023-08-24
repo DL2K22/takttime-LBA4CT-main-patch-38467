@@ -153,6 +153,8 @@ function resetCountdown(){
 
   segundos = 0;
   minutos = 0;
+
+  location.reload();
 }
     
 
@@ -165,6 +167,7 @@ function resetCountdown(){
 // ! ||--------------------------------------------------------------------------------||
 
 function stopCountdown() {
+  stopAllCronometros();
   isAnyRunning = false;
   isTimerRunning = false;
   isStopTimeRunning = false;
@@ -203,6 +206,17 @@ function stopCountdown() {
 };
 
 
+function stopAllCronometros() {
+  for (let i = 0; i < intervalIds.length; i++) {
+    if (intervalIds[i]) {
+      pararCronometro(intervalIds[i], i + 1);
+      CorTelaNormal(i + 1);
+      intervalIds[i] = null;
+    }
+  }
+}
+
+
 
 
 // ! ||--------------------------------------------------------------------------------||
@@ -222,6 +236,8 @@ function pad(value) {
 let segundos = 0;
 let minutos = 0;
 
+const intervalIds = [];
+
 const temposCronometros = {};
 
 function iniciarCronometro(id) {
@@ -234,25 +250,28 @@ function iniciarCronometro(id) {
     temposCronometros[id] = { segundos: 0, minutos: 0 };
   }
 
-  segundos = temposCronometros[id].segundos;
-  minutos = temposCronometros[id].minutos;
 
   const atualizarCronometro = () => {
-    segundos++;
-    if (segundos === 60) {
-      segundos = 0;
-      minutos++;
+    temposCronometros[id].segundos++;
+    if (temposCronometros[id].segundos === 60) {
+      temposCronometros[id].segundos = 0;
+      temposCronometros[id].minutos++;
     }
+    const { segundos, minutos } = temposCronometros[id];
     cronometro.textContent = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
     cronometro_tabs.textContent = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
   };
+
   boxtab.classList.add('boxtab-ativo');
   boxandon.classList.add('boxandon-ativo');
+  atualizarCronometro();
   const intervalId = setInterval(atualizarCronometro, 1000);
   return intervalId;
 }
 
-function pararCronometro(intervalId) {
+
+
+function pararCronometro(intervalId, id) {
   clearInterval(intervalId);
   temposCronometros[id].segundos = segundos;
   temposCronometros[id].minutos = minutos;
@@ -325,10 +344,9 @@ for (let i = 1; i <= 8; i++) {
       CorTelaNormal(i);
       intervalId = null;
       isAnyRunning = false;
-        
     } else {
-
       intervalId = iniciarCronometro(i);
+      intervalIds[i - 1] = intervalId;
       isAnyRunning = true;
     }
     botao.classList.add('animating');
