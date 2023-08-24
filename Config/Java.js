@@ -10,7 +10,7 @@
 var timerElement = document.getElementById('timer');
 var bodyElement = document.body;
 var intervalId_takt;
-var totalSeconds = 7 * 60; // 7 minutos em segundos
+var totalSeconds = 2; // 7 minutos em segundos
 
 
 const startBtn = document.getElementById('botao');
@@ -65,6 +65,21 @@ function startstoptime() {
   timerElement.textContent = '00:00';
   bodyElement.classList.add('red-background');
   stoptime_ativo.classList.add('stoptime-ativo');
+
+  const tabsToDisable = document.querySelectorAll('.boxtab');
+  const abas = document.querySelectorAll('.print-tab');
+  const nav = document.querySelectorAll('.nav');
+  tabsToDisable.forEach(tab => {
+    tab.classList.add('disabled-tab');
+  });
+  abas.forEach(tab => {
+    tab.classList.add('disabled-tab-2');
+  });
+  nav.forEach(tab => {
+    tab.classList.add('nav-disabled');
+  });
+
+
     if (isStopTimeRunning) {
       return; // Timer is already running, do nothing
     }
@@ -153,6 +168,19 @@ function resetCountdown(){
 
   segundos = 0;
   minutos = 0;
+
+  const tabsToDisable = document.querySelectorAll('.boxtab');
+  const abas = document.querySelectorAll('.print-tab');
+  const nav = document.querySelectorAll('.nav');
+  tabsToDisable.forEach(tab => {
+    tab.classList.remove('disabled-tab');
+  });
+  abas.forEach(tab => {
+    tab.classList.remove('disabled-tab-2');
+  });
+  nav.forEach(tab => {
+    tab.classList.remove('nav-disabled');
+  });
 
   location.reload();
 }
@@ -286,37 +314,29 @@ function CorTelaNormal(id) {
 }
 
 function chaveAndon() {
-  isAnyRunning = false;
-  console.log("Pause");
-
+  const buttons = [];
+  const intervalIds = [];
+  
   for (let i = 1; i <= 8; i++) {
-    const botao = document.querySelector(`.btn_andon${i}`);
-    let intervalId;
-
-    const turnOn = () => {
-      botao.classList.add('active');
-    }
-    
-    const turnOff = () => {
-      botao.classList.remove('active');
-    }
-    
-    const toggleAnimation = () => {
-      botao.classList.remove('animating');
-      intervalId ? turnOn() : turnOff();
-    };
-
-    if (!intervalId) {
-      clearInterval(intervalId, i);
-      intervalId = null;
+    if (intervalIds[i - 1] !== null) {
+      clearInterval(i);
       CorTelaNormal(i);
-    } else {
-      console.log("Iniciar O Andon Primeiro !");
+      intervalIds[i - 1] = null;
+      const cronometro = document.getElementById(`andon${i}`);
+      const cronometro_tabs = document.getElementById(`andontab${i}`);
+      cronometro.textContent = '00:00';
+      cronometro_tabs.textContent = '00:00';
+
+      const botao = document.querySelector(`.btn_andon${i}`);
+      botao.classList.remove('animating');
+      botao.classList.remove('active');
+      
+      buttons.push(botao);
     }
-    
-    botao.classList.add('animating');
-    botao.addEventListener('animationend', toggleAnimation);
   }
+
+  segundos = 0;
+  minutos = 0;
 }
 
 

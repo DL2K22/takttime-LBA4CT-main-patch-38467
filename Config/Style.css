@@ -182,6 +182,24 @@ body {
   transition: background-color 2s ease-in-out;
 }
 
+.disabled-tab {
+  pointer-events: none; /* Isso impede que o elemento seja clicado */
+  opacity: 0.5; /* Isso pode dar uma aparência visual de desabilitado */
+}
+
+.disabled-tab-2 .print-tab ul.print-tab-menu {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.disabled-tab-2 .print-tab ul.print-tab-menu > li.active {
+  border-top: 2px solid #00ff22;
+}
+
+.nav-disabled {
+  --bg-color2: rgb(255 255 255 / 80%);
+  background: var(--bg-color2);
+}
+
 .boxtab-ativo {
   background-color: yellow;
 }
