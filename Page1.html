@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedal Car</title>
+    <link rel="stylesheet" href="/Config/Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <div>
+      Pedal Car
+    </div>
+    <div class="scaniaway">
+      <img src="/Pictures/Scania_Logo_seit_2016_(Coat_of_Arms).png">
+    </div>
+  </header>
+
+  <nav>
+    <a href="#" class="toggle">
+      <div>
+        <div class="icon"><i class="fas fa-times"></i></div>
+        <div class="icon"><i class="fas fa-bars"></i></div>
+      </div>
+    </a>
+      <div class="escrita_menu">MENU</div>
+    <div class="items">
+      <a href="/Page1.html" class="item">
+        <div class="icon">
+          <i class="material-symbols-outlined">refresh</i>
+        </div>
+        <div class="label">
+          Atualizar Página
+        </div>
+      </a>
+      <a href="#" class="item" onclick=startstoptime()>
+        <div class="icon">
+          <i class="material-symbols-outlined">Key</i>
+        </div>
+        <div class="label">
+          Ativar Stop Time
+        </div>
+      </a>
+      <a href="#" class="item" onclick=chaveAndon()>
+        <div class="icon">
+          <i class="material-symbols-outlined">timer_3_alt_1</i>
+        </div>
+        <div class="label">
+          Zerar Andon
+        </div>
+      </a>
+      <a href="Index.html" class="item">
+        <div class="icon">
+          <i class="material-symbols-outlined">logout</i>
+        </div>
+        <div class="label">
+          Sair
+        </div>
+      </a>
+    </div>
+  </nav>
+ 
+  <div class="pedalcar">
+    Scania Way Experience Arena
+  </div>
+
+  <div class="print-tab" data-tab-id="1">
+    <div class="print-tab-content">
+      <div data-tab-content="tab1">
+      <Section>
+        <div id="container" class="container">
+            <div class="box1">
+                <div class="topbox1">
+                    TAKT
+                </div>
+                <div class="midbox1">
+                    <span id="timer">07:00</span>
+                </div>
+            </div>
+            <div class="box2">
+                <div class="topbox2">
+                    STOP TIME
+                </div>
+                <div class="midbox2">
+                    <span id="stoptime">00:00</span>
+                </div>
+            </div>
+            <div class="box3">
+              <div class="topbox4">
+                  ANDON
+              </div>
+              <div class="midbox4">
+                <div class="boxandon1" id="boxandon-ativo1">
+                  <p class="titulo">Posto 1</p>
+                  <span class="titulo" id="andon1">00:00</span>
+                </div>
+                <div class="boxandon2" id="boxandon-ativo2">
+                  <p class="titulo">Posto 2</p>
+                  <span class="titulo" id="andon2">00:00</span>
+                </div>
+                <div class="boxandon3" id="boxandon-ativo3">
+                  <p class="titulo">Posto 3</p>
+                  <span class="titulo" id="andon3">00:00</span>
+                </div>
+                <div class="boxandon4" id="boxandon-ativo4">
+                  <p class="titulo">Posto 4</p>
+                  <span class="titulo" id="andon4">00:00</span>
+                </div>
+                <div class="boxandon5" id="boxandon-ativo5">
+                  <p class="titulo">Posto 5</p>
+                  <span class="titulo" id="andon5">00:00</span>
+                </div>
+                <div class="boxandon6" id="boxandon-ativo6">
+                  <p class="titulo">Posto 6</p>
+                  <span class="titulo" id="andon6">00:00</span>
+                </div>
+                <div class="boxandon7" id="boxandon-ativo7">
+                  <p class="titulo">Posto 7</p>
+                  <span class="titulo" id="andon7">00:00</span>
+                </div>
+                <div class="boxandon8" id="boxandon-ativo8">
+                  <p class="titulo">Posto 8</p>
+                  <span class="titulo" id="andon8">00:00</span>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="botmenu"> 
+            <div class="btns-wrapper">
+                <div class="btn">
+                  <div class="inner-wrapper">
+                    <i onclick=startCountdown() class="material-symbols-outlined" id="botao" disabled>play_arrow</i>
+                  </div>
+                </div>
+                <div class="btn">
+                  <div class="inner-wrapper">
+                    <i onclick=stopCountdown() class="material-symbols-outlined pauseButton" id="botao" disabled>pause</i>
+                  </div>
+                </div>
+                <div class="btn">
+                  <div class="inner-wrapper">
+                    <i onclick=resetCountdown() class="material-symbols-outlined resetButton" id="botao" disabled>restart_alt</i>
+                  </div>
+                </div>
+              </div>
+      </Section>
+      </div>
+      <div data-tab-content="tab2">
+    <section>
+    <div class="boxtab" id="boxtab-ativo1">
+      <div class="topbox3">
+          ANDON
+      </div>
+      <div class="midbox3">
+          <span id="andontab1">00:00</span>
+      </div>
+      <div class="botbox3">
+          <button type="button" class="btn_andon1">
+              <span>
+                <b></b>
+                <svg viewBox="-5.5 -5.5 68 71" id="circle">
+                  <circle cx="30" cy="30" r="30" stroke="white" stroke-width="8" fill="transparent"></circle>
+                </svg>
+              </span>
+            </button>
+      </div>
+    </div>
+  </section>
+      </div>
+      <div data-tab-content="tab3">
+    <section>
+      <div class="boxtab" id="boxtab-ativo2">
+        <div class="topbox3">
+            ANDON
+        </div>
+        <div class="midbox3">
+            <span id="andontab2">00:00</span>
+        </div>
+        <div class="botbox3">
+            <button type="button" class="btn_andon2">
+                <span>
+                  <b></b>
+                  <svg viewBox="-5.5 -5.5 68 71" id="circle">
+                    <circle cx="30" cy="30" r="30" stroke="white" stroke-width="8" fill="transparent"></circle>
+                  </svg>
+                </span>
+              </button>
+        </div>
+      </div>
+    </section>
+      </div>
+      <div data-tab-content="tab4">
+    <section>
+      <div class="boxtab" id="boxtab-ativo3">
+        <div class="topbox3">
+            ANDON
+        </div>
+        <div class="midbox3">
+            <span id="andontab3">00:00</span>
+        </div>
+        <div class="botbox3">
+            <button type="button" class="btn_andon3">
+                <span>
+                  <b></b>
+                  <svg viewBox="-5.5 -5.5 68 71" id="circle">
+                    <circle cx="30" cy="30" r="30" stroke="white" stroke-width="8" fill="transparent"></circle>
+                  </svg>
+                </span>
+              </button>
+        </div>
+      </div>
+    </section>
+      </div>
+      <div data-tab-content="tab5">
+    <section>
+      <div class="boxtab" id="boxtab-ativo4">
+        <div class="topbox3">
+            ANDON
+        </div>
+        <div class="midbox3">
+            <span id="andontab4">00:00</span>
+        </div>
+        <div class="botbox3">
+            <button type="button" class="btn_andon4">
+                <span>
+                  <b></b>
+                  <svg viewBox="-5.5 -5.5 68 71" id="circle">
+                    <circle cx="30" cy="30" r="30" stroke="white" stroke-width="8" fill="transparent"></circle>
+                  </svg>
+                </span>
+              </button>
+        </div>
+      </div>
+    </section>
+      </div>
+      <div data-tab-content="tab6">
+        <section>
+          <div class="boxtab" id="boxtab-ativo5">
+            <div class="topbox3">
+                ANDON
+            </div>
+            <div class="midbox3">
+                <span id="andontab5">00:00</span>
+            </div>
+            <div class="botbox3">
+                <button type="button" class="btn_andon5">
+                    <span>
+                      <b></b>
+                      <svg viewBox="-5.5 -5.5 68 71" id="circle">
+                        <circle cx="30" cy="30" r="30" stroke="white" stroke-width="8" fill="transparent"></circle>
+                      </svg>
+                    </span>
+                  </button>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div data-tab-content="tab7">
+            <section>
+              <div class="boxtab" id="boxtab-ativo6">
+                <div class="topbox3">
+                    ANDON
+                </div>
+                <div class="midbox3">
+                    <span id="andontab6">00:00</span>
+                </div>
+                <div class="botbox3">
+                    <button type="button" class="btn_andon6">
+                        <span>
+                          <b></b>
+                          <svg viewBox="-5.5 -5.5 68 71" id="circle">
+                            <circle cx="30" cy="30" r="30" stroke="white" stroke-width="8" fill="transparent"></circle>
+                          </svg>
+                        </span>
+                      </button>
+                </div>
+              </div>
+            </section>
+      </div>
+      <div data-tab-content="tab8">
+        <section>
+          <div class="boxtab" id="boxtab-ativo7">
+            <div class="topbox3">
+                ANDON
+            </div>
+            <div class="midbox3">
+                <span id="andontab7">00:00</span>
+            </div>
+            <div class="botbox3">
+                <button type="button" class="btn_andon7">
+                    <span>
+                      <b></b>
+                      <svg viewBox="-5.5 -5.5 68 71" id="circle">
+                        <circle cx="30" cy="30" r="30" stroke="white" stroke-width="8" fill="transparent"></circle>
+                      </svg>
+                    </span>
+                  </button>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div data-tab-content="tab9">
+        <section>
+          <div class="boxtab" id="boxtab-ativo8">
+            <div class="topbox3">
+                ANDON
+            </div>
+            <div class="midbox3">
+                <span id="andontab8">00:00</span>
+            </div>
+            <div class="botbox3">
+                <button type="button" class="btn_andon8">
+                    <span>
+                      <b></b>
+                      <svg viewBox="-5.5 -5.5 68 71" id="circle">
+                        <circle cx="30" cy="30" r="30" stroke="white" stroke-width="8" fill="transparent"></circle>
+                      </svg>
+                    </span>
+                  </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+
+  <div class="wrapper">
+
+    <div class="print-tab" data-tab-id="1">
+      <ul class="print-tab-menu">
+        <li data-tab-menu="tab1"><a>TAKT</a></li>
+        <li data-tab-menu="tab2"><a>POSTO 1</a></li>
+        <li data-tab-menu="tab3"><a>POSTO 2</a></li>
+        <li data-tab-menu="tab4"><a>POSTO 3</a></li>
+        <li data-tab-menu="tab5"><a>POSTO 4</a></li>
+        <li data-tab-menu="tab6"><a>POSTO 5</a></li>
+        <li data-tab-menu="tab7"><a>POSTO 6</a></li>
+        <li data-tab-menu="tab8"><a>POSTO 7</a></li>
+        <li data-tab-menu="tab9"><a>POSTO 8</a></li>
+      </ul>
+    </div>
+    </div>
+  </div>
+
+
+  <script src="/Config/Java.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+
+  <script id="rendered-js">
+    const toggle = document.querySelector('nav .toggle');
+    toggle.addEventListener('click', e => {
+      e.currentTarget.parentElement.classList.
+      toggle('expanded');
+    });
+    //# sourceURL=pen.js
+  </script>
+
+
+  <script>
+    $(function(){
+
+  $.each($(".print-tab .print-tab-menu > li"), function(index, value){
+    var menu = $(value).data('tab-menu');
+    var tabID = $(value).parent().parent().data('tab-id');
+    var hash = window.location.hash.split("#").join('');
+  
+    if(hash.length > 0){
+      
+      if(menu == hash){
+        $('.print-tab[data-tab-id="' + tabID + '"] .print-tab-menu > li[data-tab-menu="' + menu + '"]').addClass('active');
+        $('.print-tab[data-tab-id="' + tabID + '"] .print-tab-content > div[data-tab-content="' + menu + '"]').addClass('view');
+      }
+    
+    }else{
+      $('.print-tab[data-tab-id="' + tabID + '"] .print-tab-menu > li:eq(0)').addClass('active');
+      $('.print-tab[data-tab-id="' + tabID + '"] .print-tab-content > div:eq(0)').addClass('view');
+    }
+  });
+
+
+
+  $(".print-tab .print-tab-menu > li").click(function(event){
+    var $this = $(this),
+      $data = $this.data('tab-menu'),
+      $tabID = $this.parent().parent().data('tab-id');
+    if(!$(this).hasClass("active")){
+
+      window.location.hash = $data;
+    
+      $('.print-tab[data-tab-id="' + $tabID + '"] .print-tab-menu > li').removeClass('active');
+      $(this).addClass('active');
+    
+      $('.print-tab[data-tab-id="' + $tabID + '"] .print-tab-content > div.view').removeClass('view');
+      $('.print-tab[data-tab-id="' + $tabID + '"] .print-tab-content > div[data-tab-content="' + $data + '"]').addClass('view');
+    }
+  });
+  });
+  </script>
+</body>
+
+</html>

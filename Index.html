@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/Pictures/Scania_Logo_seit_2016_(Coat_of_Arms).png" type="image/png">
+    <title>Pedal Car</title>
+    <link rel="stylesheet" href="/Config/Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<header>
+    <div>
+        Pedal Car
+    </div>
+    <div>
+        Scania Way Experience Arena
+    </div>
+    
+</header>
+
+
+<body>
+    <video class="bg-video" autoplay loop video>
+        <source src="/Pictures/Video.mp4" type="video/mp4">
+        Seu navegador não suporta a exibição de vídeos.
+    </video>
+
+    
+
+    <div class="login-container">
+
+    <form id="login-form">
+
+        <h2>Login</h2>
+
+        <div class="campo">
+            <input type="password" placeholder="Senha" id="password" required>
+            <span class="material-symbols-outlined" id="olho">
+                visibility
+            </span>
+        </div>
+
+        <button id="button_submit" type="submit">Entrar</button>
+
+    </form>
+
+    </div>
+
+<script>
+    document.getElementById("login-form").addEventListener("submit", checkLogin);
+
+    function checkLogin(event) {
+        event.preventDefault(); // Prevent form submission
+
+        const passwordInput = document.getElementById("password").value;
+
+        if (passwordInput === "teste") {
+            window.location.href = "Page1.html";
+        } else {
+            alert("Senha incorreta. Tente novamente!");
+        }
+    }
+</script>
+
+<script>
+    document.getElementById('olho').addEventListener('mousedown', function() {
+    document.getElementById('password').type = 'text';
+    });
+
+    document.getElementById('olho').addEventListener('mouseup', function() {
+    document.getElementById('password').type = 'password';
+    });
+
+    // Para que o password não fique exposto apos mover a imagem.
+    document.getElementById('olho').addEventListener('mousemove', function() {
+    document.getElementById('password').type = 'password';
+    });
+</script>
+</body>
+</html>
