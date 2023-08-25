@@ -10,7 +10,7 @@
 var timerElement = document.getElementById('timer');
 var bodyElement = document.body;
 var intervalId_takt;
-var totalSeconds = 2; // 7 minutos em segundos
+var totalSeconds = 5; // 7 minutos em segundos
 
 
 const startBtn = document.getElementById('botao');
@@ -61,6 +61,7 @@ var minutes_stoptime = 0, seconds_stoptime = 0;
 let isStopTimeRunning = false;
 
 function startstoptime() {
+  StopAndon_StopTime();
   clearInterval(intervalId_takt);
   timerElement.textContent = '00:00';
   bodyElement.classList.add('red-background');
@@ -85,6 +86,7 @@ function startstoptime() {
     }
     isStopTimeRunning = true;
     intervalId_stoptime = setInterval(updatestoptime, 1000);
+
 }
 
 function updatestoptime() {
@@ -142,6 +144,8 @@ function resetCountdown(){
       const cronometro_tabs = document.getElementById(`andontab${i}`);
       cronometro.textContent = '00:00';
       cronometro_tabs.textContent = '00:00';
+
+      temposCronometros[i] = { segundos: 0, minutos: 0 };
 
       const botao = document.querySelector(`.btn_andon${i}`);
       botao.classList.remove('animating');
@@ -237,6 +241,66 @@ function stopCountdown() {
 function stopAllCronometros() {
   for (let i = 0; i < intervalIds.length; i++) {
     if (intervalIds[i]) {
+
+      temposCronometros[i + 1].segundos = segundos;
+      temposCronometros[i + 1].minutos = minutos;
+
+      pararCronometro(intervalIds[i], i + 1);
+      CorTelaNormal(i + 1);
+      intervalIds[i] = null;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+function StopAndon_StopTime() {
+  stopAllCronometros();
+
+  console.log("Pause Andon");
+
+  for (let i = 1; i <= 8; i++) {
+    const botao = document.querySelector(`.btn_andon${i}`);
+    let intervalId;
+
+    const turnOn = () => {
+      botao.classList.add('active');
+    }
+    
+    const turnOff = () => {
+      botao.classList.remove('active');
+    }
+    
+    const toggleAnimation = () => {
+      botao.classList.remove('animating');
+      intervalId ? turnOn() : turnOff();
+    };
+
+    if (!intervalId) {
+      clearInterval(i);
+      intervalId = null;
+    } else {
+      console.log("Iniciar O Andon Primeiro !");
+    }
+    
+    botao.classList.add('animating');
+    botao.addEventListener('animationend', toggleAnimation);
+  }
+};
+
+
+function stopAllCronometros() {
+  for (let i = 0; i < intervalIds.length; i++) {
+    if (intervalIds[i]) {
+
+      temposCronometros[i + 1].segundos = segundos;
+      temposCronometros[i + 1].minutos = minutos;
+
       pararCronometro(intervalIds[i], i + 1);
       CorTelaNormal(i + 1);
       intervalIds[i] = null;
@@ -288,6 +352,7 @@ function iniciarCronometro(id) {
     const { segundos, minutos } = temposCronometros[id];
     cronometro.textContent = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
     cronometro_tabs.textContent = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+    isAnyRunning = true;
   };
 
   boxtab.classList.add('boxtab-ativo');
@@ -299,10 +364,8 @@ function iniciarCronometro(id) {
 
 
 
-function pararCronometro(intervalId, id) {
+function pararCronometro(intervalId) {
   clearInterval(intervalId);
-  temposCronometros[id].segundos = segundos;
-  temposCronometros[id].minutos = minutos;
 }
 
 function CorTelaNormal(id) {
@@ -313,30 +376,8 @@ function CorTelaNormal(id) {
   boxandon.classList.remove('boxandon-ativo');
 }
 
-function chaveAndon() {
-  const buttons = [];
-  const intervalIds = [];
-  
-  for (let i = 1; i <= 8; i++) {
-    if (intervalIds[i - 1] !== null) {
-      clearInterval(i);
-      CorTelaNormal(i);
-      intervalIds[i - 1] = null;
-      const cronometro = document.getElementById(`andon${i}`);
-      const cronometro_tabs = document.getElementById(`andontab${i}`);
-      cronometro.textContent = '00:00';
-      cronometro_tabs.textContent = '00:00';
+function chaveAndon(id) {
 
-      const botao = document.querySelector(`.btn_andon${i}`);
-      botao.classList.remove('animating');
-      botao.classList.remove('active');
-      
-      buttons.push(botao);
-    }
-  }
-
-  segundos = 0;
-  minutos = 0;
 }
 
 
@@ -367,7 +408,6 @@ for (let i = 1; i <= 8; i++) {
     } else {
       intervalId = iniciarCronometro(i);
       intervalIds[i - 1] = intervalId;
-      isAnyRunning = true;
     }
     botao.classList.add('animating');
     botao.addEventListener('animationend', toggleAnimation);
