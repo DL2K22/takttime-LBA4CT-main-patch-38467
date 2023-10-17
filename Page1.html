@@ -74,10 +74,15 @@
         <div id="container" class="container">
             <div class="box1">
                 <div class="topbox1">
-                    TAKT
+                  TAKT
                 </div>
                 <div class="midbox1">
-                    <span id="timer">07:00</span>
+                  <span id="timer">00:00</span>  
+                </div>
+                <div class="botbox1">
+                  <div class="button">
+                    <a onclick="inserirTempo()">Inserir Tempo</a>
+                  </div>
                 </div>
             </div>
             <div class="box2">
@@ -86,6 +91,11 @@
                 </div>
                 <div class="midbox2">
                     <span id="stoptime">00:00</span>
+                </div>
+                <div class="botbox2">
+                  <div class="button Disabled-Button">
+                    <a onclick="inserirTempo()">Inserir Tempo</a>
+                  </div>
                 </div>
             </div>
             <div class="box3">
@@ -126,6 +136,11 @@
                   <span class="titulo" id="andon8">00:00</span>
                 </div>
               </div>
+              <div class="botbox4">
+                <div class="button Disabled-Button">
+                  <a onclick="inserirTempo()">Inserir Tempo</a>
+                </div>
+              </div>
             </div>
         </div>
 
@@ -159,14 +174,9 @@
           <span id="andontab1">00:00</span>
       </div>
       <div class="botbox3">
-          <button type="button" class="btn_andon1">
-              <span>
-                <b></b>
-                <svg viewBox="-5.5 -5.5 68 71" id="circle">
-                  <circle cx="30" cy="30" r="30" stroke="white" stroke-width="8" fill="transparent"></circle>
-                </svg>
-              </span>
-            </button>
+            <div class="button btn_andon1">
+              <a>Iniciar / Parar</a>
+            </div>
       </div>
     </div>
   </section>

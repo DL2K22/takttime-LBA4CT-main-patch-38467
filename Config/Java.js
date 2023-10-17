@@ -10,7 +10,6 @@
 var timerElement = document.getElementById('timer');
 var bodyElement = document.body;
 var intervalId_takt;
-var totalSeconds = 5; // 7 minutos em segundos
 
 
 const startBtn = document.getElementById('botao');
@@ -18,17 +17,53 @@ let isTimerRunning = false;
 let isAnyRunning = false;
 
 
+
+let minutos_takt = 0;
+let segundos_takt = 0;
+let intervalId;
+
+function inserirTempo() {
+    const tempoInput = prompt("Insira o tempo desejado (minutos e segundos separados por espaço, ex: 3 30):");
+
+    if (tempoInput !== null) {
+        const tempoArray = tempoInput.split(" ");
+        if (tempoArray.length === 2) {
+            minutos_takt = parseInt(tempoArray[0]);
+            segundos_takt = parseInt(tempoArray[1]);
+
+            if (!isNaN(minutos_takt) && !isNaN(segundos_takt)) {
+                const tempoFormatado = formatarTempo(minutos_takt, segundos_takt);
+                timerElement.textContent = tempoFormatado;
+            } else {
+                alert("Por favor, insira um tempo válido.");
+            }
+        } else {
+            alert("Formato inválido. Insira minutos e segundos separados por espaço.");
+        }
+    }
+}
+
+function formatarTempo(min, sec) {
+    return `${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+}
+
+
+
 function startCountdown() {
-    if (isTimerRunning) {
-        return; // Timer is already running, do nothing
-      }
-      intervalId_takt = setInterval(updateCountdown, 1000);
-      isTimerRunning = true;
+  if (isTimerRunning) {
+      return; // Timer is already running, do nothing
+    }
+  if (minutos_takt === 0 && segundos_takt === 0) {
+    alert("Por favor, insira um tempo antes de iniciar o cronômetro.");
+    return;
+  }
+  intervalId_takt = setInterval(updateCountdown, 1000);
+  isTimerRunning = true;
 
 }
 
 function updateCountdown() {
-  if (totalSeconds <= 0) {
+  if (minutos_takt === 0 && segundos_takt === 0) {
     if (isAnyRunning) {
       console.log('Takt Acabou Com Um Andon Ativo, Stop Time Iniciado !');
       alert('Takt Acabou Com Um Andon Ativo, Stop Time Iniciado !');
@@ -41,10 +76,13 @@ function updateCountdown() {
     }
   } else {
     console.log('Timing...');
-    var minutes = Math.floor(totalSeconds / 60);
-    var seconds = totalSeconds % 60;
-    timerElement.textContent = pad(minutes) + ':' + pad(seconds);
-    totalSeconds--;
+    if (segundos_takt === 0) {
+      minutos_takt--;
+      segundos_takt = 59;
+    } else {
+        segundos_takt--;
+    }
+    timerElement.textContent = formatarTempo(minutos_takt, segundos_takt);
   }
 }
 
